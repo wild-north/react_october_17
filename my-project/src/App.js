@@ -1,94 +1,112 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {
-  Checkbox,
-  Chat
-} from './Demo';
 
-const timerStyles = {
-  color: 'red'
-};
-
-class Timer2 extends Component {
-  constructor(props) {
-    super(props);
+class TodoListApp extends Component {
+  constructor(args) {
+    super(args);
     this.state = {
-      date: new Date()
+      list: []
     };
+    this.addNewTask = this.addNewTask.bind(this);
+    this.removeTask = this.removeTask.bind(this);
   }
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        date: new Date()
-      });
-    }, 1000);
+  addNewTask(text) {
+    this.setState({
+      list: [...this.state.list, text]
+    })
   }
-  render() {
-    const { showFullDate } = this.props;
+  removeTask(id) {
+    const copy = this.state.list.slice();
+    copy.splice(id, 1);
+    this.setState({
+      list: copy
+    })
+  }
 
-    if (showFullDate) {
-      return (
-        <div>
-          <h1>TIME:</h1>
-          <h2 style={ timerStyles }>{ this.state.date.toLocaleString() }</h2>
-        </div>
-      );
-    }
+
+  render() {
+  const { list } = this.state;
 
     return (
-      <h1>{ this.state.date.toLocaleTimeString() }</h1>
+      <div>
+        <Form addNewTask={ this.addNewTask }/>
+        <FormWithRefs addNewTask={ this.addNewTask }/>
+        <List list={ list } onRemove={ this.removeTask }/>
+      </div>
     );
   }
 }
 
-// const Timer = (props) => {
-//   const { date } = props;
+class Form extends Component{
+  constructor(args) {
+    super(args);
+    this.state = {
+      text: 'Привет, я - форма.'
+    };
 
-//   return (
-//     <h1>{ date.toLocaleTimeString() }</h1>
-//   );
-// }
+    this.inputChange = this.inputChange.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
+  }
 
-// class App extends Component {
-//   render() {
-//       const list = [
-//         'lorem', 'ipsum'
-//       ];
+  inputChange(ev) {
+    this.setState({
+      text: ev.target.value
+    })
+  }
+  formSubmit(ev) {
+    ev.preventDefault();
+    this.setState({
+      text: ''
+    })
+    this.props.addNewTask(this.state.text);
+  }
 
-//         return (
-//           <div className="App">
-//             <header className="App-header">
-//               <img src={ logo } className="App-logo" alt="logo" />
-//               <h1 className="App-title">Welcome to React</h1>
-//             </header>
-//             <p className="App-intro">
-//               To get started, edit <code>src/App.js</code> and save to reload.
-//             </p>
-//             <div>
-//               {
-//                 list.map((elem, index) => {
-//                   return <li key={ index }>{ elem }</li>;
-//                 })
-//               }
-//             </div>
-//             <Timer2 showFullDate />
-//           </div>
-//         );
-//     }
-//   }
+  render() {
+    return (
+      <form onSubmit={ this.formSubmit }>
+        <input type="text"
+          value={ this.state.text }
+          onChange={ this.inputChange }
+          />
+      </form>
+    );
+  }
+}
 
-const App = () => (
-  <div>
-    <Chat welcomeMessage="hi there!">
-      <div>bla bla bla</div>
-    </Chat>
+class FormWithRefs extends Component{
+  constructor(args) {
+    super(args);
 
-    <hr/>
-    
-    <Checkbox />
-  </div>
-);
+    this.formSubmit = this.formSubmit.bind(this);
+  }
 
+  formSubmit(ev) {
+    ev.preventDefault();
 
-export default App;
+    this.props.addNewTask(this.myInput.value);
+    this.myInput.value = '';
+  }
+
+  render() {
+    return (
+      <form onSubmit={ this.formSubmit }>
+        <input type="text" ref={ (element) => {
+          this.myInput = element;
+        } }/>
+      </form>
+    );
+  }
+}
+
+const List = ({ list, onRemove }) => (
+  <ul>
+    {
+      list.map((item, index) => (
+        <li key={ index } onClick={ () => onRemove(index) }>
+          { item }
+        </li>
+      ))
+    }
+  </ul>
+)
+
+export default TodoListApp;
