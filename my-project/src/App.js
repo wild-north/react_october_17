@@ -1,68 +1,62 @@
-import React from 'react';
-import {
-  Route,
-  Link,
-  withRouter
-} from 'react-router-dom';
+import React, { Component } from 'react';
 
-const Home = () => <h1>Home</h1>;
-const About = () => <h1>About page</h1>;
-const ProductButton = ({ history }) => (
-    <button onClick={ () => {
-      setTimeout(() => {
-          history.push('/product')
-      }, 1000);
-    }}>Products</button>
-);
-const ProductLink = withRouter(ProductButton);
-
-const LinksSection = () => (
-    <nav>
-      <Link to="/">Home</Link>
-        {' |||| '}
-      <Link to={ {pathname: '/about'} }>About</Link>
-        {' |||| '}
-      <ProductLink />
-    </nav>
+const Item = ({ id, name, desc, deleteItem }) => (
+    <li key={ id }>
+        <strong>{ name }</strong>
+        <div>{ desc }</div>
+        <button onClick={ () => deleteItem(id) }>X</button>
+    </li>
 );
 
-const ProductList = (props) => {
+const List = ({ list, deleteItem }) => (
+    <ul>
+        {
+            list.map(data => <Item key={ data.id } { ...data } deleteItem={ deleteItem }/>)
+        }
+    </ul>
+);
 
-    const products = [
-        {id: 100, name: 'товар 1', desc: 'охренительная штука всего за $99.99'},
-        {id: 101, name: 'товар 2', desc: 'еще болле охренительная штука всего за $999.99'},
-        {id: 102, name: 'товар 3', desc: 'мегаохренительная штука всего за $1099.99'},
-    ];
-    return (
-        <div>
-          <h1>Product List:</h1>
-          <ul>
-              {
-                  products.map(({ id, name, desc }) => (
-                      <li key={ id }>
-                        <button onClick={ () => props.history.push(`/product/${id}`) }><strong>{ name }</strong></button>
-                        <div>{ desc }</div>
-                      </li>
-                  ))
-              }
-          </ul>
-        </div>
-    );
+class TodoApp extends Component {
+    constructor(...args) {
+        super(...args);
+
+        console.log(this.props);
+
+        this.state = {
+            list: [
+                {id: '100', name: 'таск 1', desc: 'сделать все хоршо'},
+                {id: '101', name: 'таск 2', desc: 'сделать все еще лучше'},
+                {id: '102', name: 'таск 3', desc: 'сделать все ништяк'},
+            ]
+        };
+        this.deleteItem = this.deleteItem.bind(this);
+    }
+    deleteItem(id) {
+        const { list } = this.state;
+
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].id === id) {
+                const copy = this.state.list.slice();
+                copy.splice(i, 1);
+                this.setState({
+                    list: copy
+                });
+            }
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Todo List:</h1>
+                <List list={ this.state.list } deleteItem={ this.deleteItem }/>
+            </div>
+        );
+    }
 };
-const ProductDetails = ({ productId }) => <h1>Product #{ productId } Details</h1>;
+const TodoDetails = ({ item }) => <h4>{ item.description }</h4>;
 
-const App = () => (
-  <div>
-    <LinksSection />
-
-    <Route exact path="/" render={ (props) => <Home/> }/>
-    <Route path="/about/" component={ About }/>
-    <Route exact path="/product" component={ ProductList } />
-    <Route exact path="/product/:productId" render={ ({ match }) => <ProductDetails { ...match.params }/> }/>
-  </div>
-);
-
-export default App;
+export default TodoApp;
 
 
 
