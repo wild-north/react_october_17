@@ -13,7 +13,7 @@ export const todos = (state = initialState, action) => {
             const copy = state.filter(val => val.id !== action.payload);
 
             return copy;
-        default:
-            return state;
     }
+
+    return state;
 };

@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import TodoApp from './components/app';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { myStore } from './store';
 import { appConnector } from './components/app/connector';
 
-const MyApp = appConnector(App);
+window.store = myStore;
+
+const MyApp = appConnector(TodoApp);
 
 ReactDOM.render(
-    <Provider store={ store }>
+    <Provider store={ myStore }>
         <MyApp />
     </Provider>,
     document.getElementById('root')

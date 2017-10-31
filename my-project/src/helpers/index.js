@@ -11,3 +11,12 @@ export const createConnector = (mapStateToProps, actions = {}) =>
 export const createAction = type => payload => ({
     type, payload
 });
+
+// export function createAction (type) {
+//     return function (payload) {
+//         return {
+//             type: type,
+//             payload: payload
+//         }
+//     }
+// }

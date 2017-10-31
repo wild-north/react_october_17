@@ -1,9 +1,29 @@
+import { connect } from 'react-redux';
 import { createConnector } from '../../helpers';
+import { deleteItem } from '../../actions';
 
-const mapStateToProps = store => ({
-    list: store.todos
-});
+const mapStateToProps = function (state) {
+  return {
+      list: state.todos
+  };
+};
 
-const mapDispatchToProps = {};
+//
+// const mapDispatchToProps = {};
+//
+// export const appConnector = createConnector(mapStateToProps, mapDispatchToProps);
 
-export const appConnector = createConnector(mapStateToProps, mapDispatchToProps);
+export const appConnector = function(component) {
+  return connect(mapStateToProps)(component);
+};
+
+
+
+
+
+
+
+
+
+
+

@@ -11,7 +11,10 @@ export const Item = ({ id, name, desc, deleteItem }) => (
 );
 
 Item.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+  ]).isRequired,
   name: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   deleteItem: PropTypes.func.isRequired
