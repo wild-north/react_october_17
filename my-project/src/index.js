@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './components/app';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { store } from './store';
+import { appConnector } from './components/app/connector';
 
-const myStore = createStore(() => {}, {
-    ololo: true
-});
+const MyApp = appConnector(App);
 
 ReactDOM.render(
-    <Provider store={ myStore }>
-        <App />
+    <Provider store={ store }>
+        <MyApp />
     </Provider>,
     document.getElementById('root')
 );
