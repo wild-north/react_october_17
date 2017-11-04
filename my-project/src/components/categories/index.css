@@ -1,0 +1,7 @@
+ol {
+
+}
+
+li:before {
+  counter-increment: item;
+}
