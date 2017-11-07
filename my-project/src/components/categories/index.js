@@ -35,3 +35,48 @@ const CategoryItem = ({ id, name, sub, source, parentId }) => {
         </li>
     );
 };
+
+
+
+
+
+/// 1. click on the Button
+/// (download product list)
+// function onClick() {
+//     store.dispatch({
+//         type: 'PRODUCT_LIST_REQUEST'
+//     });
+//     fetch('http://example.com/products')
+//         .then(resp => resp.toJSON())
+//         .then(data => {
+//             store.dispatch({
+//                 type: 'PRODUCT_LIST_SUCCESS',
+//                 payload: data
+//             });
+//         })
+//         .catch(err => {
+//             store.dispatch({
+//                 type: 'PRODUCT_LIST_FAILURE',
+//                 payload: data
+//             });
+//         });
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
