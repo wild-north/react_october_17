@@ -1,2 +1,3 @@
-export const DELETE_ITEM = 'DELETE_ITEM';
-export const ADD_ITEM = 'ADD_ITEM';
+export const ITEM_DELETE = 'ITEM_DELETE';
+export const ITEM_DELETE_ASYNC = 'ITEM_DELETE_ASYNC';
+export const ITEM_ADD = 'ITEM_ADD';

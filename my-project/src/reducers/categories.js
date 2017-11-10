@@ -1,4 +1,4 @@
-import * as constants from '../actions/constants';
+// import * as constants from '../actions/constants';
 
 const initialState = [
     {id: 'c-100', name: 'Категория 1', sub: ['c-103', 'c-104'], parentId: null},

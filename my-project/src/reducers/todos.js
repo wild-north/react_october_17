@@ -9,11 +9,11 @@ const initialState = [
 export const todos = (state = initialState, action) => {
 
     switch (action.type) {
-        case constants.DELETE_ITEM:
+        case constants.ITEM_DELETE:
             const copy = state.filter(val => val.id !== action.payload);
 
             return copy;
+        default:
+            return state;
     }
-
-    return state;
 };

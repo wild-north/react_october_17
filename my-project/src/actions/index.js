@@ -1,18 +1,6 @@
 import { createAction } from '../helpers';
 import * as constants from './constants';
 
-export const deleteItem = (payload) => {
-    // return {
-    //     type: constants.DELETE_ITEM,
-    //     payload
-    // };
+export const deleteItem = createAction(constants.ITEM_DELETE);
 
-    return (dispatch) => {
-        setTimeout(() => {
-            dispatch({
-                type: constants.DELETE_ITEM,
-                payload
-            });
-        }, 2000)
-    }
-};
+export const deleteItemAsync = createAction(constants.ITEM_DELETE_ASYNC);

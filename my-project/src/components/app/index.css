@@ -9,3 +9,15 @@ section {
     vertical-align: top;
     padding: 20px;
 }
+
+a {
+    border: none;
+    background: none;
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px;
+}
+a:hover {
+    text-decoration: underline;
+}
