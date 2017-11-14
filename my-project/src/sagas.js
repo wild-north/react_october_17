@@ -12,17 +12,37 @@ export function* deleteAsync(action) {
     console.log('timeout');
     yield delay(2000);
     console.log('delay');
-    yield put(deleteItem(action && action.payload));
-    console.log('put');
+    const newAction = deleteItem(action.payload);
+    yield put(newAction);
+    console.log('put', newAction);
 }
 
-export function* watchIncrementAsync() {
-    console.log('watchIncrementAsync');
+function* getList () {
+    console.log('getList');
+    const list = fetch('http://192.168.10.176:8080/data.json')
+        .then(resp => resp.toJSON())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(() => {
+            console.log('Все ОЧЕНЬ плохо');
+        });
+
+
+}
+
+export function* watchDeleteAsync() {
+    console.log('watchDeleteAsync');
     yield takeEvery(constants.ITEM_DELETE_ASYNC, deleteAsync);
+}
+export function* watchGetList() {
+    console.log('watchGetList');
+    yield takeEvery(constants.GET_LIST, getList);
 }
 
 export function* rootSaga () {
     yield all([
-        watchIncrementAsync()
+        watchIncrementAsync(),
+        watchGetList()
     ]);
 }

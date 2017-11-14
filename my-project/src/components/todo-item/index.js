@@ -6,8 +6,12 @@ export const Item = ({ id, name, desc, deleteItem, deleteItemAsync }) => (
     <li key={ id }>
         <strong>{ name }</strong>
         <div>{ desc }</div>
-        <a onClick={ () => deleteItem(id) }><span role="img" aria-label="del">✖</span>︎</a>
-        <a onClick={ () => deleteItemAsync(id) }><span role="img" aria-label="del-as">❌</span>︎</a>
+        <a onClick={ () => deleteItem(id) }>
+            <span role="img" aria-label="del">✖</span>
+        ︎</a>
+        <a onClick={ () => deleteItemAsync(id) }>
+            <span role="img" aria-label="del-as">❌</span>︎
+        </a>
     </li>
 );
 

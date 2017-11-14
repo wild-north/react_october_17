@@ -15,11 +15,12 @@ const categories = [
 ];
 
 const TodoApp = (props) => {
-    const { list } = props;
+    const { list, getCategories } = props;
 
     return (
         <div>
             <aside>
+                <button onClick={ getCategories }>GetData from server</button>
                 <Categories tree={ categories } source={ categories }/>
             </aside>
             <section>
