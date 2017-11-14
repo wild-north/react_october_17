@@ -1,33 +1,43 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { rootReducer } from './reducers';
 import thunk from 'redux-thunk';
+import {
+    LOADER_HIDE,
+    LOADER_SHOW
+} from './actions/constants';
 
-// const logger = store => next=> action => {
-//     console.log('dispatching', action);
-//     const result = next(action);
-//     console.log('next state', store.getState());
-//     return result;
-// };
-// const omitAction = actionsArray => store => next => action => {
-//     if (!actionsArray.some(val => val === action.type)) {
-//         return next(action);
-//     }
-//     console.log('Sorry, this action is deprecated');
-// };
-// const ping = store => next => action => {
-//     console.log('ping');
-//     return next(action);
-// };
-// const pong = store => next => action => {
-//     console.log('pong');
-//     return next(action);
-// };
+const loader = store => next => action => {
+    if (typeof action === 'function') {
+        return next(action);
+    }
+
+    const arr = action.type.match(/(.*)(_REQUEST$|_SUCCESS$|_FAILURE$)/);
+    let id;
+
+    if (arr && arr.length >= 1){
+        id = arr[1];
+    }
+
+    if (/.*_REQUEST$/.test(action.type)) {
+        store.dispatch({
+            type: LOADER_SHOW,
+            payload: id
+        });
+    }
+    if (/.*_SUCCESS$/.test(action.type)
+        || /.*_FAILURE$/.test(action.type)
+    ) {
+        store.dispatch({
+            type: LOADER_HIDE,
+            payload: id
+        });
+    }
+
+    return next(action);
+};
 
 const middlewares = [
-    // ping,
-    // pong,
-    // logger,
-    // omitAction(["DELETE_ITEM"])
+    loader,
     thunk
 ];
 

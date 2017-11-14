@@ -3,6 +3,7 @@ import { List } from '../todos';
 import PropTypes from 'prop-types';
 import './index.css';
 import { List as Categories } from '../categories';
+import Loader from '../loader';
 
 const categories = [
     {id: 'c-01', name: 'Cat 1', sub: ['c-05'], parentId: null},
@@ -15,14 +16,18 @@ const categories = [
 ];
 
 const TodoApp = (props) => {
-    const { list } = props;
+    const { list, loaderShown, loadList } = props;
 
     return (
         <div>
             <aside>
+                <Loader id="LIST"/>
+                <button onClick={ loadList }>LoadData</button>
                 <Categories tree={ categories } source={ categories }/>
             </aside>
             <section>
+                <Loader id="TASK"/>
+                <button>LoadTasks</button>
                 {
                     list.length
                         ? [

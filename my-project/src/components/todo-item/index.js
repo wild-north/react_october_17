@@ -6,7 +6,7 @@ export const Item = ({ id, name, desc, deleteItem }) => (
     <li key={ id }>
         <strong>{ name }</strong>
         <div>{ desc }</div>
-        <button onClick={ () => deleteItem(id) }>X</button>
+        <a href="#" onClick={ deleteItem }>X</a>
     </li>
 );
 

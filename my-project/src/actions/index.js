@@ -1,18 +1,18 @@
-import { createAction } from '../helpers';
+import { createAction, preventDefault } from '../helpers';
 import * as constants from './constants';
 
-export const deleteItem = (payload) => {
-    // return {
-    //     type: constants.DELETE_ITEM,
-    //     payload
-    // };
+export const deleteItem = (payload) => ({
+    type: constants.DELETE_ITEM,
+    payload
+});
 
-    return (dispatch) => {
-        setTimeout(() => {
-            dispatch({
-                type: constants.DELETE_ITEM,
-                payload
-            });
-        }, 2000)
-    }
+export const loadList = () => (dispatch) => {
+    dispatch({
+        type: constants.LIST_REQUEST
+    });
+    setTimeout(() => {
+        dispatch({
+            type: constants.LIST_SUCCESS
+        });
+    }, 10000);
 };
