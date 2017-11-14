@@ -2,7 +2,7 @@ import React from 'react';
 import { List } from '../todos';
 import PropTypes from 'prop-types';
 import './index.css';
-import { Categories } from '../categories';
+import { List as Categories } from '../categories';
 
 const categories = [
     {id: 'c-01', name: 'Cat 1', sub: ['c-05'], parentId: null},

@@ -1,7 +1,17 @@
-ol {
-
+.ol{
+  list-style: none;
 }
 
-li:before {
+ol > li:first-child {
+  counter-reset: item;
+}
+ol > li {
   counter-increment: item;
+  position: relative;
+}
+ol > li:before {
+  content:counters(item, ".") ". ";
+  position: absolute;
+  margin-right: 100%;
+  right: 4px;
 }
