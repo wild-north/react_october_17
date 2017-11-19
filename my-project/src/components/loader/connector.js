@@ -7,7 +7,7 @@ const mapStateToProps = function (state) {
 };
 
 export const connector = component =>
-    connect(mapStateToProps)(component)
+    connect(mapStateToProps)(component);
 
 
 

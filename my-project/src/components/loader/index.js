@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connector } from './connector';
 
-const Loader = ({ id, visibleItems }) => {
-    const isShown =  visibleItems.some(val => val === id);
+const Loader = ({ observedAction, visibleItems }) => {
+    const isShown =  visibleItems.some(val => val === observedAction);
 
     return (
         <span>
@@ -18,20 +18,8 @@ const Loader = ({ id, visibleItems }) => {
 
 Loader.displayName = 'Loader';
 Loader.propTypes = {
-    isShown: PropTypes.bool.isRequired
+    observedAction: PropTypes.string.isRequired,
+    visibleItems: PropTypes.array.isRequired
 };
 
 export default connector(Loader);
-
-
-
-
-
-
-
-
-
-
-
-
-

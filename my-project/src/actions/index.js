@@ -14,5 +14,5 @@ export const loadList = () => (dispatch) => {
         dispatch({
             type: constants.LIST_SUCCESS
         });
-    }, 10000);
+    }, 3000);
 };

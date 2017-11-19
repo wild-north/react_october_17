@@ -1,4 +1,4 @@
-import * as constants from '../actions/constants';
+import { LOADER_SHOW, LOADER_HIDE } from './constants';
 
 const initialState = {
     visibleItems: []
@@ -7,14 +7,14 @@ const initialState = {
 export const loader = (state = initialState, action) => {
 
     switch (action.type) {
-        case constants.LOADER_SHOW:{
+        case LOADER_SHOW:{
             const copy = state.visibleItems.slice();
             copy.push(action.payload);
             return Object.assign({}, state, {
                 visibleItems: copy
             });
         }
-        case constants.LOADER_HIDE:{
+        case LOADER_HIDE:{
             const copy = state.visibleItems
                 .filter(val => val !== action.payload);
 

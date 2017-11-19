@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './index.css';
 import { List as Categories } from '../categories';
 import Loader from '../loader';
+import * as constants from '../../actions/constants';
 
 const categories = [
     {id: 'c-01', name: 'Cat 1', sub: ['c-05'], parentId: null},
@@ -21,12 +22,12 @@ const TodoApp = (props) => {
     return (
         <div>
             <aside>
-                <Loader id="LIST"/>
+                <Loader observedAction={ constants.LIST_REQUEST }/>
                 <button onClick={ loadList }>LoadData</button>
                 <Categories tree={ categories } source={ categories }/>
             </aside>
             <section>
-                <Loader id="TASK"/>
+                <Loader observedAction={ constants.LIST_REQUEST }/>
                 <button>LoadTasks</button>
                 {
                     list.length

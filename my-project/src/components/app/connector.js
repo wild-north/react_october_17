@@ -4,8 +4,8 @@ import { deleteItem, loadList } from '../../actions';
 
 const mapStateToProps = function (state) {
   return {
-      list: state.todos,
-      loaderShown: state.loader.isShown
+      list: state.get('todos').toJS(),
+      loaderShown: state.getIn(['loader', 'isShown'])
   };
 };
 const mapDispatchToProps = {
