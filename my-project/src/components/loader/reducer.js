@@ -1,8 +1,9 @@
 import { LOADER_SHOW, LOADER_HIDE } from './constants';
+import Immutable from 'immutable';
 
-const initialState = {
+const initialState = Immutable.fromJS({
     visibleItems: []
-};
+});
 
 export const loader = (state = initialState, action) => {
 

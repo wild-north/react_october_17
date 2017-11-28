@@ -12,7 +12,11 @@ export const todos = (state = initialState, action) => {
 
     switch (action.type) {
         case constants.DELETE_ITEM:
-            return state.delete(action.payload);
+            const iof = state.findIndex(val => {
+                return val.get('id') === action.payload
+            });
+
+            return iof !== -1 ? state.delete(iof) : state;
 
     }
 

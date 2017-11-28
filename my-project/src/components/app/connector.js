@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import { createConnector } from '../../helpers';
-import { deleteItem, loadList } from '../../actions';
+import { loadList } from '../../actions';
 
 const mapStateToProps = function (state) {
   return {
-      list: state.get('todos').toJS(),
-      loaderShown: state.getIn(['loader', 'isShown'])
+      list: state.todos.toJS()
   };
 };
 const mapDispatchToProps = {

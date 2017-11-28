@@ -2,13 +2,20 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { itemConnector } from './connector';
 
-export const Item = ({ id, name, desc, deleteItem }) => (
-    <li key={ id }>
-        <strong>{ name }</strong>
-        <div>{ desc }</div>
-        <a href="#" onClick={ deleteItem }>X</a>
-    </li>
-);
+
+export const Item = ({ id, name, desc, deleteItem }) => {
+    const handleClick = (ev) => {
+        ev.preventDefault();
+        deleteItem(id);
+    };
+    return (
+        <li key={ id }>
+            <strong>{ name }</strong>
+            <div>{ desc }</div>
+            <a href="#" onClick={ handleClick }>X</a>
+        </li>
+    )
+};
 
 Item.propTypes = {
   id: PropTypes.oneOfType([

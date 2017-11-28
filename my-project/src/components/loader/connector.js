@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = function (state) {
     return {
-        visibleItems: state.loader.visibleItems
+        visibleItems: state.loader.get('visibleItems').toJS()
     };
 };
 
